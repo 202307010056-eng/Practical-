@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -5,101 +6,110 @@
 <title>E-Commerce Website</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial;
-}
-
-body{
-  background:#f4f6f8;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial;
 }
 
 /* NAVBAR */
-nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#0d1b2a;
-  color:white;
-  padding:15px 30px;
+nav {
+  background: #1f2933;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  align-items: center;
 }
 
-nav ul{
-  list-style:none;
-  display:flex;
-  gap:25px;
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
 }
 
-nav a{
-  color:white;
-  text-decoration:none;
+nav a {
+  text-decoration: none;
+  color: white;
 }
 
-.cart{
-  background:orange;
-  padding:6px 14px;
-  border-radius:20px;
+.cart {
+  background: #ff3b3b;
+  padding: 5px 10px;
+  border-radius: 20px;
 }
 
 /* PRODUCT GRID */
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:25px;
-  padding:30px;
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  padding: 40px;
 }
 
-.card{
-  background:white;
-  padding:15px;
-  border-radius:10px;
-  text-align:center;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 15px;
+  text-align: center;
+  transition: 0.3s;
 }
 
-.card button{
-  margin-top:10px;
-  padding:10px 18px;
-  background:#1b9aaa;
-  color:white;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
+.card:hover {
+  transform: scale(1.03);
 }
 
-/* CART */
-.cart-box{
-  background:white;
-  margin:30px;
-  padding:20px;
-  border-radius:10px;
+.card img {
+  width: 100%;
 }
 
-.cart-item{
-  margin:8px 0;
-  padding:8px;
-  border-bottom:1px solid #ddd;
+.card button {
+  margin-top: 10px;
+  padding: 10px 18px;
+  background: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* TOTAL */
+.total {
+  text-align: center;
+  font-size: 22px;
+  padding-bottom: 30px;
 }
 
 /* LOGIN */
-.login{
-  background:white;
-  margin:30px auto;
-  width:300px;
-  padding:25px;
-  border-radius:10px;
+.login {
+  max-width: 350px;
+  margin: 40px auto;
+  border: 1px solid #ccc;
+  padding: 25px;
+  border-radius: 12px;
 }
 
-.login input{
-  width:100%;
-  padding:10px;
-  margin:10px 0;
+.login input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
 }
 
-@media(max-width:600px){
-  nav ul{display:none;}
+.login button {
+  width: 100%;
+  padding: 10px;
+  background: green;
+  color: white;
+  border: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>
 </head>
@@ -108,80 +118,68 @@ nav a{
 
 <!-- NAVBAR -->
 <nav>
-  <h2>ShopEase</h2>
+  <h2>E-Shop</h2>
   <ul>
-    <li><a href="#home">Home</a></li>
-    <li><a href="#cart">Cart</a></li>
+    <li><a href="#">Home</a></li>
     <li><a href="#login">Login</a></li>
+    <li class="cart">🛒 Cart: <span id="cartCount">0</span></li>
   </ul>
-  <div class="cart">🛒 <span id="count">0</span></div>
 </nav>
 
 <!-- PRODUCTS -->
-<section class="products" id="home">
-
+<section class="products">
   <div class="card">
+    <img src="https://via.placeholder.com/200">
     <h3>Headphones</h3>
     <p>₹1500</p>
-    <button onclick="addToCart('Headphones',1500)">Add to Cart</button>
+    <button onclick="addToCart(1500)">Add to Cart</button>
   </div>
 
   <div class="card">
+    <img src="https://via.placeholder.com/200">
     <h3>Smart Watch</h3>
     <p>₹2500</p>
-    <button onclick="addToCart('Smart Watch',2500)">Add to Cart</button>
+    <button onclick="addToCart(2500)">Add to Cart</button>
   </div>
 
   <div class="card">
+    <img src="https://via.placeholder.com/200">
     <h3>Shoes</h3>
     <p>₹3000</p>
-    <button onclick="addToCart('Shoes',3000)">Add to Cart</button>
+    <button onclick="addToCart(3000)">Add to Cart</button>
   </div>
 
+  <div class="card">
+    <img src="https://via.placeholder.com/200">
+    <h3>Backpack</h3>
+    <p>₹1800</p>
+    <button onclick="addToCart(1800)">Add to Cart</button>
+  </div>
 </section>
 
-<!-- CART -->
-<div class="cart-box" id="cart">
-  <h3>Cart Summary</h3>
-  <div id="cartItems"></div>
-  <h4>Total: ₹<span id="total">0</span></h4>
+<!-- TOTAL PRICE -->
+<div class="total">
+  Total Price: ₹<span id="totalPrice">0</span>
 </div>
 
-<!-- LOGIN -->
-<div class="login" id="login">
-  <h3>Login</h3>
+<!-- LOGIN SECTION -->
+<section class="login" id="login">
+  <h2>Login</h2>
   <input type="text" placeholder="Username">
   <input type="password" placeholder="Password">
-  <button style="width:100%;padding:10px;background:#0d1b2a;color:white;">
-    Login
-  </button>
-</div>
+  <button>Login</button>
+</section>
 
 <script>
-let cart = [];
+let cart = 0;
+let total = 0;
 
-function addToCart(name, price){
-  cart.push({name, price});
-  updateCart();
-}
+function addToCart(price) {
+  cart++;
+  total += price;
 
-function updateCart(){
-  document.getElementById("count").innerText = cart.length;
-
-  let cartBox = document.getElementById("cartItems");
-  cartBox.innerHTML = "";
-
-  let total = 0;
-
-  cart.forEach(item => {
-    let div = document.createElement("div");
-    div.className = "cart-item";
-    div.innerText = item.name + " - ₹" + item.price;
-    cartBox.appendChild(div);
-    total += item.price;
-  });
-
-  document.getElementById("total").innerText = total;
+  document.getElementById("cartCount").innerText = cart;
+  document.getElementById("totalPrice").innerText = total;
 }
 </script>
 
